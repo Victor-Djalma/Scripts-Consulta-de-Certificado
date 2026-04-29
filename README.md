@@ -81,15 +81,14 @@ Evitar expor arquivos da CA (rootCA.key)
 Validar certificados antes de substituir
 Manter backups (.bak)
 Monitorar logs de execução
-📈 Possíveis Melhorias
-Envio de alertas por e-mail ou webhook
-Integração com sistemas de monitoramento
-Suporte a múltiplos certificados no script de renovação
-Logs estruturados
-Integração com ferramentas como Vault ou AWS ACM
+
+---
+
 👨‍💻 Autor
 
 Victor Djalma
+
+---
 
 📄 Licença
 
