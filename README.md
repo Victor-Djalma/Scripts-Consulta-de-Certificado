@@ -15,14 +15,21 @@ Esses scripts são úteis em ambientes que utilizam certificados locais (ex: lab
 
 Este script percorre um diretório contendo certificados (.crt) e exibe:
 
-Nome do certificado
-Quantidade de dias restantes até a expiração
-Alerta caso esteja próximo de expirar
+Nome do certificado;
+
+Quantidade de dias restantes até a expiração;
+
+Alerta caso esteja próximo de expirar.
+
 💡 Funcionamento
-Lê a data de expiração usando openssl
-Converte para timestamp
-Calcula a diferença em dias
-Exibe alerta se estiver abaixo do limite
+
+Lê a data de expiração usando openssl;
+
+Converte para timestamp;
+
+Calcula a diferença em dias;
+
+Exibe alerta se estiver abaixo do limite.
 
 --- 
 
@@ -31,25 +38,33 @@ Exibe alerta se estiver abaixo do limite
 
 Este script automatiza:
 
-Verificação da validade de um certificado específico
-Geração de um novo certificado caso esteja próximo da expiração
-Backup do certificado antigo
-Reload do serviço (ex: Nginx)
-⚙️ Configurações
-CERT_DIR="/home/kali/criptolab"
-CERT_NAME="server"
-DAYS_THRESHOLD=30
-CERT_NAME: Nome base do certificado
-DAYS_THRESHOLD: Limite mínimo de dias para renovação automática
+Verificação da validade de um certificado específico;
+
+Geração de um novo certificado caso esteja próximo da expiração;
+
+Backup do certificado antigo;
+
+Reload do serviço (ex: Nginx).
+
+
 💡 Funcionamento
+
 Verifica quantos dias faltam para expiração
+
 Se estiver acima do limite → não faz nada
+
 Se estiver abaixo:
+
 Gera CSR automaticamente
+
 Assina com CA local
+
 Valida novo certificado
+
 Faz backup do antigo
+
 Substitui pelo novo
+
 Reinicia o serviço
 
 ---
@@ -63,12 +78,18 @@ crontab -e
 Adicionar:
 
 0 2 * * * /caminho/para/Recriação\ de\ Certificado.sh
-🔐 Boas Práticas de Segurança
-Proteger a chave privada (.key) com permissões restritas
-Evitar expor arquivos da CA (rootCA.key)
-Validar certificados antes de substituir
-Manter backups (.bak)
-Monitorar logs de execução
+
+🔐 Boas Práticas de Segurança:
+
+Proteger a chave privada (.key) com permissões restritas;
+
+Evitar expor arquivos da CA (rootCA.key);
+
+Validar certificados antes de substituir;
+
+Manter backups (.bak);
+
+Monitorar logs de execução.
 
 ---
 
