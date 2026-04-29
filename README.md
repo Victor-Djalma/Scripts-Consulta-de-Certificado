@@ -1,1 +1,96 @@
 # Scripts-Consulta-de-Certificado
+
+Scripts de Consulta e Renovação de Certificados
+📌 Visão Geral
+
+Este repositório contém dois scripts em Bash desenvolvidos para facilitar a gestão e aumentar a segurança no controle de expiração de certificados digitais.
+
+A proposta é automatizar:
+
+A verificação de validade de certificados
+A renovação automática quando estiverem próximos da expiração
+
+Esses scripts são úteis em ambientes que utilizam certificados locais (ex: laboratórios, ambientes internos, aplicações com CA própria).
+
+📂 Estrutura
+.
+├── Consultar Certificado.sh
+├── Recriação de Certificado.sh
+└── README.md
+🔎 Script 1: Consulta de Certificados
+📄 Consultar Certificado.sh
+
+Este script percorre um diretório contendo certificados (.crt) e exibe:
+
+Nome do certificado
+Quantidade de dias restantes até a expiração
+Alerta caso esteja próximo de expirar
+⚙️ Configurações
+CERT_DIR="/home/kali/criptolab"
+ALERT_DAYS=30
+CERT_DIR: Diretório onde os certificados estão armazenados
+ALERT_DAYS: Número de dias para disparar alerta
+💡 Funcionamento
+Lê a data de expiração usando openssl
+Converte para timestamp
+Calcula a diferença em dias
+Exibe alerta se estiver abaixo do limite
+
+--- 
+
+🔄 Script 2: Renovação Automática
+📄 Recriação de Certificado.sh
+
+Este script automatiza:
+
+Verificação da validade de um certificado específico
+Geração de um novo certificado caso esteja próximo da expiração
+Backup do certificado antigo
+Reload do serviço (ex: Nginx)
+⚙️ Configurações
+CERT_DIR="/home/kali/criptolab"
+CERT_NAME="server"
+DAYS_THRESHOLD=30
+CERT_NAME: Nome base do certificado
+DAYS_THRESHOLD: Limite mínimo de dias para renovação automática
+💡 Funcionamento
+Verifica quantos dias faltam para expiração
+Se estiver acima do limite → não faz nada
+Se estiver abaixo:
+Gera CSR automaticamente
+Assina com CA local
+Valida novo certificado
+Faz backup do antigo
+Substitui pelo novo
+Reinicia o serviço
+
+---
+
+⏰ Automação com Crontab
+
+Para execução automática diária (ex: 02:00 da manhã):
+
+crontab -e
+
+Adicionar:
+
+0 2 * * * /caminho/para/Recriação\ de\ Certificado.sh
+🔐 Boas Práticas de Segurança
+Proteger a chave privada (.key) com permissões restritas
+Evitar expor arquivos da CA (rootCA.key)
+Validar certificados antes de substituir
+Manter backups (.bak)
+Monitorar logs de execução
+📈 Possíveis Melhorias
+Envio de alertas por e-mail ou webhook
+Integração com sistemas de monitoramento
+Suporte a múltiplos certificados no script de renovação
+Logs estruturados
+Integração com ferramentas como Vault ou AWS ACM
+👨‍💻 Autor
+
+Victor Djalma
+
+📄 Licença
+
+Este projeto pode ser utilizado para fins educacionais e laboratoriais.
