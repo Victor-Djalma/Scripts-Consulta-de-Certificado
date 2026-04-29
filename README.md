@@ -12,24 +12,12 @@ A renovação automática quando estiverem próximos da expiração
 
 Esses scripts são úteis em ambientes que utilizam certificados locais (ex: laboratórios, ambientes internos, aplicações com CA própria).
 
-📂 Estrutura
-.
-├── Consultar Certificado.sh
-├── Recriação de Certificado.sh
-└── README.md
-🔎 Script 1: Consulta de Certificados
-📄 Consultar Certificado.sh
 
 Este script percorre um diretório contendo certificados (.crt) e exibe:
 
 Nome do certificado
 Quantidade de dias restantes até a expiração
 Alerta caso esteja próximo de expirar
-⚙️ Configurações
-CERT_DIR="/home/kali/criptolab"
-ALERT_DAYS=30
-CERT_DIR: Diretório onde os certificados estão armazenados
-ALERT_DAYS: Número de dias para disparar alerta
 💡 Funcionamento
 Lê a data de expiração usando openssl
 Converte para timestamp
